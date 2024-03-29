@@ -9,7 +9,8 @@ import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Navbar from "./Components/Navbar";
+import Navbar from "@/Components/Navbar";
+import { Box } from "@mui/material";
 
 const appName =
     window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
@@ -27,9 +28,15 @@ createInertiaApp({
         root.render(
             <>
                 <BrowserRouter>
-                    <Navbar />
                     <ToastContainer />
-                    <App {...props} />
+                    <Navbar />
+                    <Box
+                        sx={{
+                            marginTop: { lg: 10, sm: 8 },
+                        }}
+                    >
+                        <App {...props} />
+                    </Box>
                 </BrowserRouter>
             </>
         );
