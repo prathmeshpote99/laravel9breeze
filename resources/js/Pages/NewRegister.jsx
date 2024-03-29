@@ -4,7 +4,7 @@ const NewRegister = () => {
     return (
         <>
             <div>
-                <h1>Register page</h1>
+                <h1>This is Register page</h1>
             </div>
         </>
     );

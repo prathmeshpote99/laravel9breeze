@@ -11,7 +11,7 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import ApplicationLogo from "./ApplicationLogo";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
+import { router } from "@inertiajs/react";
 
 const darkTheme = createTheme({
     palette: {
@@ -64,8 +64,6 @@ function Navbar() {
         setAnchorElUser(null);
     };
 
-    const navigate = useNavigate();
-
     return (
         <ThemeProvider theme={darkTheme}>
             <AppBar position="fixed">
@@ -100,7 +98,7 @@ function Navbar() {
                                     key={page.id}
                                     onClick={() => {
                                         handleCloseNavMenu();
-                                        navigate(`${page.route}`);
+                                        router.visit(`${page.route}`)
                                     }}
                                     sx={{
                                         my: 3,
@@ -153,7 +151,7 @@ function Navbar() {
                                         key={page.id}
                                         onClick={() => {
                                             handleCloseNavMenu();
-                                            navigate(`${page.route}`);
+                                            router.visit(`${page.route}`)
                                         }}
                                     >
                                         <Typography textAlign="center">

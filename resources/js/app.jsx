@@ -27,7 +27,6 @@ createInertiaApp({
 
         root.render(
             <>
-                <BrowserRouter>
                     <ToastContainer />
                     <Navbar />
                     <Box
@@ -37,7 +36,6 @@ createInertiaApp({
                     >
                         <App {...props} />
                     </Box>
-                </BrowserRouter>
             </>
         );
     },
