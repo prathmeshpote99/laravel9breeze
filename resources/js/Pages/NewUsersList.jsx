@@ -7,9 +7,9 @@ export default function NewUsersList() {
 
     function fetchUsersData() {
         axios
-            .get("/")
+            .get("/findall")
             .then((res) => {
-                setData(res.data);
+                setData(res.data.users);
             })
             .catch((err) => console.log(err));
     }

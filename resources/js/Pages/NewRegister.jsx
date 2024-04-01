@@ -1,6 +1,42 @@
+import axios from "axios";
 import React from "react";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 const NewRegister = () => {
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [age, setAge] = useState("");
+    const [password, setPassword] = useState("");
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        const data = {
+            first_name: firstName,
+            last_name: lastName,
+            email,
+            password,
+            age,
+        };
+
+        axios
+            .post("/register", data)
+            .then((res) => {
+                console.log(res.data);
+                toast.success(res.data.message);
+            })
+            .catch((err) => {
+                console.log(err);
+                toast.error("Something went wrong");
+            });
+        setFirstName("");
+        setLastName("");
+        setAge("");
+        setEmail("");
+        setPassword("");
+    }
+
     return (
         <div className="bg-light py-3 py-md-5">
             <div className="container">
@@ -10,6 +46,7 @@ const NewRegister = () => {
                             <form
                                 className="row g-3 needs-validation was-validated"
                                 novalidate=""
+                                onSubmit={handleSubmit}
                             >
                                 <div className="row gy-3 gy-md-4 overflow-hidden">
                                     <div className="col-6">
@@ -18,7 +55,9 @@ const NewRegister = () => {
                                             className="form-label"
                                         >
                                             First Name{" "}
-                                            <span className="text-danger">*</span>
+                                            <span className="text-danger">
+                                                *
+                                            </span>
                                         </label>
                                         <div className="input-group">
                                             <span className="input-group-text">
@@ -40,6 +79,10 @@ const NewRegister = () => {
                                                 name="firstName"
                                                 id="firstName"
                                                 required
+                                                onChange={(e) =>
+                                                    setFirstName(e.target.value)
+                                                }
+                                                value={firstName}
                                             />
                                         </div>
                                     </div>
@@ -49,7 +92,9 @@ const NewRegister = () => {
                                             className="form-label"
                                         >
                                             Last Name{" "}
-                                            <span className="text-danger">*</span>
+                                            <span className="text-danger">
+                                                *
+                                            </span>
                                         </label>
                                         <div className="input-group">
                                             <span className="input-group-text">
@@ -71,6 +116,10 @@ const NewRegister = () => {
                                                 name="lastName"
                                                 id="lastName"
                                                 required
+                                                onChange={(e) =>
+                                                    setLastName(e.target.value)
+                                                }
+                                                value={lastName}
                                             />
                                         </div>
                                     </div>
@@ -78,7 +127,9 @@ const NewRegister = () => {
                                     <div className="col-12">
                                         <label for="age" className="form-label">
                                             Age{" "}
-                                            <span className="text-danger">*</span>
+                                            <span className="text-danger">
+                                                *
+                                            </span>
                                         </label>
                                         <div className="input-group">
                                             <span className="input-group-text">
@@ -94,11 +145,15 @@ const NewRegister = () => {
                                                 </svg>
                                             </span>
                                             <input
-                                                type="number"
+                                                type="text"
                                                 className="form-control"
                                                 name="age"
                                                 id="age"
                                                 required
+                                                onChange={(e) =>
+                                                    setAge(e.target.value)
+                                                }
+                                                value={age}
                                             />
                                         </div>
                                     </div>
@@ -130,7 +185,10 @@ const NewRegister = () => {
                                                 className="form-control"
                                                 name="email"
                                                 required
-                                                value="email@gmail.com"
+                                                value={email}
+                                                onChange={(e) =>
+                                                    setEmail(e.target.value)
+                                                }
                                             />
                                         </div>
                                     </div>
@@ -140,7 +198,9 @@ const NewRegister = () => {
                                             className="form-label"
                                         >
                                             Password{" "}
-                                            <span className="text-danger">*</span>
+                                            <span className="text-danger">
+                                                *
+                                            </span>
                                         </label>
                                         <div className="input-group">
                                             <span className="input-group-text">
@@ -162,7 +222,10 @@ const NewRegister = () => {
                                                 name="password"
                                                 id="password"
                                                 required
-                                                value="123456"
+                                                onChange={(e) =>
+                                                    setPassword(e.target.value)
+                                                }
+                                                value={password}
                                             />
                                         </div>
                                     </div>

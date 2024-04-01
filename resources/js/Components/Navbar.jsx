@@ -12,6 +12,8 @@ import MenuItem from "@mui/material/MenuItem";
 import ApplicationLogo from "./ApplicationLogo";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { router } from "@inertiajs/react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const darkTheme = createTheme({
     palette: {
@@ -64,6 +66,18 @@ function Navbar() {
         setAnchorElUser(null);
     };
 
+    function handleLogout() {
+        axios.get('/logout')
+            .then(res => {
+                console.log(res.data);
+                toast.success(res.data.message)
+                router.visit(`/`)
+            }).catch(err => {
+                console.log(err);
+                toast.error("Something went wrong")
+        })
+    }
+
     return (
         <ThemeProvider theme={darkTheme}>
             <AppBar position="fixed">
@@ -98,7 +112,7 @@ function Navbar() {
                                     key={page.id}
                                     onClick={() => {
                                         handleCloseNavMenu();
-                                        router.visit(`${page.route}`)
+                                        router.visit(`${page.route}`);
                                     }}
                                     sx={{
                                         my: 3,
@@ -110,6 +124,17 @@ function Navbar() {
                                     {page.component}
                                 </Button>
                             ))}
+                            <Button
+                                onClick={handleLogout}
+                                sx={{
+                                    my: 3,
+                                    color: "white",
+                                    display: "block",
+                                    marginLeft: "2%",
+                                }}
+                            >
+                                Logout
+                            </Button>
                         </Box>
 
                         <Box
@@ -151,7 +176,7 @@ function Navbar() {
                                         key={page.id}
                                         onClick={() => {
                                             handleCloseNavMenu();
-                                            router.visit(`${page.route}`)
+                                            router.visit(`${page.route}`);
                                         }}
                                     >
                                         <Typography textAlign="center">
@@ -159,6 +184,13 @@ function Navbar() {
                                         </Typography>
                                     </MenuItem>
                                 ))}
+                                <MenuItem
+                                    onClick={handleLogout}
+                                >
+                                    <Typography textAlign="center">
+                                        Logout
+                                    </Typography>
+                                </MenuItem>
                             </Menu>
                         </Box>
                     </Toolbar>

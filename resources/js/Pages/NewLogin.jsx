@@ -1,6 +1,34 @@
+import axios from "axios";
 import React from "react";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 const NewLogin = () => {
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        const data = {
+            email,
+            password,
+        };
+
+        axios
+            .post("/login", data)
+            .then((res) => {
+                console.log(res.data);
+                toast.success(res.data.message);
+            })
+            .catch((err) => {
+                console.log(err);
+                toast.error("Something went wrong");
+            });
+        setEmail("");
+        setPassword("");
+    }
+
     return (
         <div className="bg-light py-3 py-md-5">
             <div className="container">
@@ -10,6 +38,7 @@ const NewLogin = () => {
                             <form
                                 className="row g-3 needs-validation was-validated"
                                 novalidate=""
+                                onSubmit={handleSubmit}
                             >
                                 <div className="row gy-3 gy-md-4 overflow-hidden">
                                     <div className="col-12">
@@ -39,6 +68,10 @@ const NewLogin = () => {
                                                 className="form-control"
                                                 name="email"
                                                 required
+                                                onChange={(e) =>
+                                                    setEmail(e.target.value)
+                                                }
+                                                value={email}
                                             />
                                         </div>
                                     </div>
@@ -72,6 +105,10 @@ const NewLogin = () => {
                                                 name="password"
                                                 id="password"
                                                 required
+                                                onChange={(e) =>
+                                                    setPassword(e.target.value)
+                                                }
+                                                value={password}
                                             />
                                         </div>
                                     </div>
@@ -81,7 +118,7 @@ const NewLogin = () => {
                                                 className="btn btn-primary btn-lg"
                                                 type="submit"
                                             >
-                                                Sign Up
+                                                Sign In
                                             </button>
                                         </div>
                                     </div>
