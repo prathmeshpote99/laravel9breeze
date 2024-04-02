@@ -11,21 +11,21 @@ const NewShowProfile = () => {
     const [age, setAge] = useState("");
     const [password, setPassword] = useState("");
 
-    useEffect(() => {
-        axios
-            .get("/finduser")
-            .then((res) => {
-                console.log(res.data);
-                setFirstName(res.data.first_name);
-                setFirstName(res.data.last_name);
-                setFirstName(res.data.email);
-                setFirstName(res.data.age);
-                setFirstName(res.data.password);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, []);
+    // useEffect(() => {
+    //     axios
+    //         .get("/finduser")
+    //         .then((res) => {
+    //             console.log(res.data);
+    //             setFirstName(res.data.first_name);
+    //             setFirstName(res.data.last_name);
+    //             setFirstName(res.data.email);
+    //             setFirstName(res.data.age);
+    //             setFirstName(res.data.password);
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //         });
+    // }, []);
 
     // function handleSubmit(e) {
     //     e.preventDefault();
@@ -271,7 +271,9 @@ const NewShowProfile = () => {
                                             <div className="d-grid">
                                                 <button
                                                     className="btn btn-danger btn-lg"
-                                                    type="submit"
+                                                    type="button"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#staticBackdrop"
                                                 >
                                                     Delete Profile
                                                 </button>
@@ -279,6 +281,55 @@ const NewShowProfile = () => {
                                         </div>
                                     </div>
                                 </form>
+                                <div
+                                    class="modal fade mt-20"
+                                    id="staticBackdrop"
+                                    data-bs-backdrop="static"
+                                    data-bs-keyboard="false"
+                                    tabindex="-1"
+                                    aria-labelledby="staticBackdropLabel"
+                                    aria-hidden="true"
+                                >
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1
+                                                    class="modal-title fs-5 text-danger"
+                                                    id="staticBackdropLabel"
+                                                >
+                                                    Delete Profile
+                                                </h1>
+                                                <button
+                                                    type="button"
+                                                    class="btn-close"
+                                                    data-bs-dismiss="modal"
+                                                    aria-label="Close"
+                                                ></button>
+                                            </div>
+                                            <div class="modal-body text-center">
+                                                <p className="text-danger">
+                                                    Are you sure want to delete
+                                                    this profile?
+                                                </p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-dark"
+                                                    data-bs-dismiss="modal"
+                                                >
+                                                    Close
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-danger"
+                                                >
+                                                    Delete
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
