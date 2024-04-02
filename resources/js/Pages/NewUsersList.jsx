@@ -28,9 +28,9 @@ export default function NewUsersList() {
                             <th className="col-4 text-center">Full Name</th>
                             <th className="col-3 text-center">Email</th>
                             <th className="col-1 text-center">Age</th>
-                            <th className="col-1 text-center">Edit</th>
+                            {/* <th className="col-1 text-center">Edit</th>
                             <th className="col-1 text-center">View</th>
-                            <th className="col-1 text-center">Delete</th>
+                            <th className="col-1 text-center">Delete</th> */}
                         </tr>
                     </thead>
                     {data?.map((user) => {
@@ -48,7 +48,7 @@ export default function NewUsersList() {
                                         <td className="col-1 text-center">
                                             {user.age}
                                         </td>
-                                        <td className="col-1">
+                                        {/* <td className="col-1">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="16"
@@ -97,7 +97,7 @@ export default function NewUsersList() {
                                             >
                                                 <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
                                             </svg>
-                                        </td>
+                                        </td> */}
                                     </tr>
                                 </tbody>
                             </>

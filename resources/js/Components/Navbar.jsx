@@ -14,6 +14,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { router } from "@inertiajs/react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import AccountCircle from "@mui/icons-material/AccountCircle";
 
 const darkTheme = createTheme({
     palette: {
@@ -50,6 +51,8 @@ const pages = [
 function Navbar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [auth, setAuth] = React.useState(true);
+    const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -66,16 +69,31 @@ function Navbar() {
         setAnchorElUser(null);
     };
 
+    const handleChange = (event) => {
+        setAuth(event.target.checked);
+    };
+
+    const handleMenu = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+        router.visit("/my-account");
+    };
+
     function handleLogout() {
-        axios.get('/logout')
-            .then(res => {
+        axios
+            .get("/logout")
+            .then((res) => {
                 console.log(res.data);
-                toast.success(res.data.message)
-                router.visit(`/`)
-            }).catch(err => {
+                toast.success(res.data.message);
+                router.visit(`/`);
+            })
+            .catch((err) => {
                 console.log(err);
-                toast.error("Something went wrong")
-        })
+                toast.error("Something went wrong");
+            });
     }
 
     return (
@@ -184,15 +202,46 @@ function Navbar() {
                                         </Typography>
                                     </MenuItem>
                                 ))}
-                                <MenuItem
-                                    onClick={handleLogout}
-                                >
+                                <MenuItem onClick={handleLogout}>
                                     <Typography textAlign="center">
                                         Logout
                                     </Typography>
                                 </MenuItem>
                             </Menu>
                         </Box>
+                        {auth && (
+                            <div>
+                                <IconButton
+                                    size="large"
+                                    aria-label="account of current user"
+                                    aria-controls="menu-appbar"
+                                    aria-haspopup="true"
+                                    onClick={handleMenu}
+                                    color="inherit"
+                                >
+                                    <AccountCircle />
+                                </IconButton>
+                                <Menu
+                                    id="menu-appbar"
+                                    anchorEl={anchorEl}
+                                    anchorOrigin={{
+                                        vertical: "top",
+                                        horizontal: "right",
+                                    }}
+                                    keepMounted
+                                    transformOrigin={{
+                                        vertical: "top",
+                                        horizontal: "right",
+                                    }}
+                                    open={Boolean(anchorEl)}
+                                    onClose={handleClose}
+                                >
+                                    <MenuItem onClick={handleClose}>
+                                        My account
+                                    </MenuItem>
+                                </Menu>
+                            </div>
+                        )}
                     </Toolbar>
                 </Container>
             </AppBar>
