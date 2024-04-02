@@ -1,10 +1,10 @@
+import { Link } from "@inertiajs/react";
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
 const NewLogin = () => {
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -129,12 +129,12 @@ const NewLogin = () => {
                                     <hr className="mt-3 mb-3 border-secondary-subtle" />
                                     <p className="m-0 text-secondary text-center">
                                         Don't have an account?{" "}
-                                        <a
+                                        <Link
                                             href="/register"
                                             className="link-primary text-decoration-none"
                                         >
                                             Sign up
-                                        </a>
+                                        </Link>
                                     </p>
                                 </div>
                             </div>

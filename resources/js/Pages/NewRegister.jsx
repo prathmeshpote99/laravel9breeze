@@ -1,3 +1,4 @@
+import { Link } from "@inertiajs/react";
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
@@ -246,12 +247,12 @@ const NewRegister = () => {
                                     <hr className="mt-3 mb-3 border-secondary-subtle" />
                                     <p className="m-0 text-secondary text-center">
                                         Already have an account?{" "}
-                                        <a
+                                        <Link
                                             href="/login"
                                             className="link-primary text-decoration-none"
                                         >
                                             Login
-                                        </a>
+                                        </Link>
                                     </p>
                                 </div>
                             </div>
